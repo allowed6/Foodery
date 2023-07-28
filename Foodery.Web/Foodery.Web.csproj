@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
+  </ItemGroup>
+
 </Project>

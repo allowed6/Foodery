@@ -1,9 +1,9 @@
-﻿using Foodery.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
-namespace Foodery.Web.Controllers
+﻿namespace Foodery.Web.Controllers
 {
+    using Foodery.Web.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : Controller
     {
 
