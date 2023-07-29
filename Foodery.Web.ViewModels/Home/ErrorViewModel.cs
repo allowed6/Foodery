@@ -1,4 +1,4 @@
-namespace Foodery.Web.Models
+namespace Foodery.Web.ViewModels.Home
 {
     public class ErrorViewModel
     {

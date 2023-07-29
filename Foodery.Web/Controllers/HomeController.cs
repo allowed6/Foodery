@@ -1,6 +1,6 @@
 ﻿namespace Foodery.Web.Controllers
 {
-    using Foodery.Web.Models;
+    using ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 

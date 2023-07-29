@@ -1,6 +1,6 @@
 namespace Foodery.Web
 {
-    using Foodery.Web.Data;
+    using Foodery.Data;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
