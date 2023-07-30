@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
+  </ItemGroup>
+
 </Project>
