@@ -1,7 +1,9 @@
 ﻿namespace Foodery.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static Common.EntityValidationConstants.Product;
+    using static Foodery.Common.EntityValidationConstants;
 
     public class Product
     {
@@ -20,6 +22,7 @@
 
         public int CategoryId { get; set; }
 
+        [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; } = null!;
     }
 }

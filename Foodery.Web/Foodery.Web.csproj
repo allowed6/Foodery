@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
+    <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
     <ProjectReference Include="..\Foodery.Data\Foodery.Data.csproj" />
     <ProjectReference Include="..\Foodery.Web.ViewModels\Foodery.Web.ViewModels.csproj" />
   </ItemGroup>

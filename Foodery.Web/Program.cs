@@ -1,6 +1,7 @@
 namespace Foodery.Web
 {
     using Foodery.Data;
+    using Foodery.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -13,15 +14,15 @@ namespace Foodery.Web
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<FooderyDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
             {
                 options.SignIn.RequireConfirmedAccount = true;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<FooderyDbContext>();
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();

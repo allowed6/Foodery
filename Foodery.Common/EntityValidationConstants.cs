@@ -17,7 +17,15 @@ namespace Foodery.Common
         public static class Product 
         {
             public const int ProductNameMinLength = 3;
-            public const int 
+            public const int ProductNameMaxLength = 50;
+
+            public const int ProductDescriptionMinLength = 15;
+            public const int ProductDescriptionMaxLength = 250;
+
+            public const int ImageUrlMaxLength = 2048;
+
+            public const string ProductPriceMinValue = "0";
+            public const string ProductPriceMaxValue = "2000";
         }
     }
 }
