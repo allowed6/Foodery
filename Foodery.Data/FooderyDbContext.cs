@@ -12,7 +12,19 @@
         {
         }
 
+        public DbSet<Product> Products { get; set; } = null!;
 
-        //might need to delete migrations later!!!!!!!!!!!!!!!!!!
+        public DbSet<Category> Categories { get; set; } = null!;
+
+        public DbSet<Order> Orders { get; set; } = null!;
+
+        public DbSet<OrderStatus> OrderStatuses { get; set; } = null!;
+
+        public DbSet<Receipt> Receipts { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

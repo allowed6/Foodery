@@ -6,9 +6,9 @@
     {
         public ApplicationUser()
         {
-            this.Products = new List<Product>();
+            this.Orders = new List<Order>();
         }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
