@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foodery.Data.Models
+﻿namespace Foodery.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Order
     {
+        public Order()
+        {
+            this.Id = new Guid();
+        }
+
         [Key]
         public Guid Id { get; set; }
 

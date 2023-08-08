@@ -7,10 +7,15 @@
 
     public class Product
     {
-        [Key]
-        public Guid Id { get; set; }
+        public Product()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
-        public double Price { get; set; }
+        [Key]
+        public string Id { get; set; } = null!;
+
+        public decimal Price { get; set; }
 
         [Required]
         [MaxLength(ImageUrlMaxLength)]

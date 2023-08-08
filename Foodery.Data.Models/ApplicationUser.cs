@@ -6,6 +6,7 @@
     {
         public ApplicationUser()
         {
+            this.Id = Guid.NewGuid();
             this.Orders = new List<Order>();
         }
 

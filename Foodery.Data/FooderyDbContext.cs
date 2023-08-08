@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using System.Reflection;
 
     public class FooderyDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
@@ -24,6 +25,15 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            Assembly configAssembly = Assembly.GetAssembly(typeof(FooderyDbContext)) ?? 
+                                      Assembly.GetExecutingAssembly();
+
+            builder.ApplyConfigurationsFromAssembly(configAssembly);
+
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasPrecision(14, 2);
+
             base.OnModelCreating(builder);
         }
     }
