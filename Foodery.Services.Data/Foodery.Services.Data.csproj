@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
+    <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
+    <ProjectReference Include="..\Foodery.Data\Foodery.Data.csproj" />
+    <ProjectReference Include="..\Foodery.Web.ViewModels\Foodery.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

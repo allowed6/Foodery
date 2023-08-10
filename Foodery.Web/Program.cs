@@ -2,8 +2,11 @@ namespace Foodery.Web
 {
     using Foodery.Data;
     using Foodery.Data.Models;
+    using Foodery.Services.Data;
+    using Foodery.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Foodery.Web.Infrastructure.Extensions;
     using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
     public class Program
@@ -32,7 +35,11 @@ namespace Foodery.Web
                 options.Password.RequiredLength = 
                     builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<FooderyDbContext>();
+
+            builder.Services.AddApplicationServices(typeof(IProductService));
+
             builder.Services.AddControllersWithViews();
 
             WebApplication app = builder.Build();

@@ -16,14 +16,21 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
     <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
     <ProjectReference Include="..\Foodery.Data\Foodery.Data.csproj" />
+    <ProjectReference Include="..\Foodery.Services.Data\Foodery.Services.Data.csproj" />
+    <ProjectReference Include="..\Foodery.Web.Infrastructure\Foodery.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodery.Web.ViewModels\Foodery.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
 
 </Project>
