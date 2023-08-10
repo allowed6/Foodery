@@ -1,11 +1,19 @@
-﻿namespace Foodery.Web.Infrastructure.Extensions
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Foodery.Web.Infrastructure.Extensions
 {
 
     using System.Reflection;
-    using Foodery.Data.Models;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using System.Linq;
+
+    using Foodery.Data.Models;
+    using static Common.GlobalApplicationConstants;
+    using Foodery.Data;
+    using Microsoft.EntityFrameworkCore;
 
     public static class WebApplicationBuilderExtensions
     {
@@ -32,6 +40,35 @@
                 }
 
                 services.AddScoped(interfaceType, implementationType);
+            }
+        }
+
+        public static void SeedAdministrator(this IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetRequiredService<FooderyDbContext>())
+                {
+                    context.Database.EnsureCreated();
+
+                    if (!context.Roles.Any())
+                    {
+                        context.Roles.Add(new IdentityRole<Guid>
+                        {
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+
+                        context.Roles.Add(new IdentityRole<Guid>
+                        {
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+
+                        context.SaveChanges();
+                    };
+
+                }
             }
         }
     }

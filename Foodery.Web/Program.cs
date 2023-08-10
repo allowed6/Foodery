@@ -9,6 +9,9 @@ namespace Foodery.Web
     using Foodery.Web.Infrastructure.Extensions;
     using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
+    using static Common.GlobalApplicationConstants;
+    using System.Security.Cryptography.X509Certificates;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -44,6 +47,8 @@ namespace Foodery.Web
 
             WebApplication app = builder.Build();
 
+            app.SeedAdministrator();
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -67,6 +72,7 @@ namespace Foodery.Web
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
+
 
             app.Run();
         }

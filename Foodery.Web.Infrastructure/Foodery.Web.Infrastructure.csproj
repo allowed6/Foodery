@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
+    <ProjectReference Include="..\Foodery.Data\Foodery.Data.csproj" />
   </ItemGroup>
 
 </Project>
