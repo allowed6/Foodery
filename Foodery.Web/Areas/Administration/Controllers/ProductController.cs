@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Foodery.Services.Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Foodery.Web.Areas.Administration.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : AdminController
     {
-        public IActionResult Index()
+        private readonly IProductService productService;
+
+        public ProductController(IProductService productService)
         {
-            return View();
+            this.productService = productService;
         }
     }
 }

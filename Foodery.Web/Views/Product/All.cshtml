@@ -37,17 +37,20 @@
                 <td>
                     <img class="w-25 h-25" src="@item.ImageUrl"></img>
                 </td>
-                <td>
-                    <button class="w-75 btn btn-dark mb-1">
-                        <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration:none">Edit</a>
-                    </button>
-                    <button class="w-75 btn btn-dark mb-1">
-                        <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none">Details</a>
-                    </button>
-                    <button class="w-75 btn btn-dark mb-1">
-                        <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none">Delete</a>
-                    </button>
-                </td>
+                @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+                {
+                    <td>
+                        <button class="w-75 btn btn-dark mb-1">
+                            <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration:none">Edit</a>
+                        </button>
+                        <button class="w-75 btn btn-dark mb-1">
+                            <a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none">Details</a>
+                        </button>
+                        <button class="w-75 btn btn-dark mb-1">
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration:none">Delete</a>
+                        </button>
+                    </td>
+                }
             </tr>
         }
     </tbody>
