@@ -15,6 +15,10 @@
         [Key]
         public string Id { get; set; } = null!;
 
+        [Required]
+        [MaxLength(ProductNameMaxLength)]
+        public string Name { get; set; } = null!;
+
         public decimal Price { get; set; }
 
         [Required]

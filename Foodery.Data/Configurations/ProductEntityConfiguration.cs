@@ -26,6 +26,7 @@
 
             product = new Product()
             {
+                Name = "Cucumber",
                 Description = "Freshly picked cucumbers from a home garden.",
                 CategoryId = 1,
                 Price = 2.39M,
@@ -35,6 +36,7 @@
 
             product = new Product()
             {
+                Name = "Beef stake",
                 Description = "Tender beef raw stake.",
                 CategoryId = 2,
                 Price = 16.29M,
@@ -44,6 +46,7 @@
 
             product = new Product()
             {
+                Name = "Blue cheese",
                 Description = "Delicious french blue cheese.",
                 CategoryId = 3,
                 Price = 34.99M,

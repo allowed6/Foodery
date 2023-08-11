@@ -16,7 +16,9 @@
 
         public async Task<IActionResult> All()
         {
-            return View();
+            var products = await this.productService.GetAllAsync();
+
+            return this.View(products);
         }
     }
 }
