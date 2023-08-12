@@ -16,6 +16,11 @@
             this.dbContext = dbContext;
         }
 
+        public Task AddAsync(ProductAddViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ICollection<ProductAllViewModel>> GetAllAsync()
         {
             ICollection<ProductAllViewModel> allProducts = await this.dbContext.Products

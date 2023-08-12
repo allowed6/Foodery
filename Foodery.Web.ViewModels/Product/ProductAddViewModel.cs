@@ -14,7 +14,7 @@ namespace Foodery.Web.ViewModels.Product
 
         public string PictureLink { get; set; } = null!;
 
-        public int CategoryId { get; set; }
+        public string CategoryType { get; set; } = null!;
 
 
         public ICollection<CategoryAllViewModel> Categories = new List<CategoryAllViewModel>();

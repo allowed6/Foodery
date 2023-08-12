@@ -2119,7 +2119,7 @@ progress {
     --bs-table-color-state: initial;
     --bs-table-bg-state: initial;
     --bs-table-color: var(--bs-body-color);
-    --bs-table-bg: var(--bs-body-bg);
+    /*--bs-table-bg: var(--bs-body-bg);*/
     --bs-table-border-color: rgba(0, 0, 0, 0.05);
     --bs-table-accent-bg: transparent;
     --bs-table-striped-color: var(--bs-body-color);
