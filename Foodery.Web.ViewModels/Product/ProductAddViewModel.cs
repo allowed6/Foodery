@@ -12,7 +12,9 @@ namespace Foodery.Web.ViewModels.Product
 
         public string Description { get; set; } = null!;
 
-        public string PictureLink { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
+
+        public int CategoryId { get; set; }
 
         public string CategoryType { get; set; } = null!;
 

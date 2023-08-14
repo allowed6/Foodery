@@ -2,6 +2,7 @@
 using Foodery.Data.Models;
 using Foodery.Services.Data.Interfaces;
 using Foodery.Web.ViewModels.Category;
+using Microsoft.EntityFrameworkCore;
 
 namespace Foodery.Services.Data
 {
@@ -12,6 +13,17 @@ namespace Foodery.Services.Data
         public CategoryService(FooderyDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<IEnumerable<CategoryAllViewModel>> GetAllAsync()
+        {
+            IEnumerable<CategoryAllViewModel> allCategories = await this.dbContext.Categories
+                .Select(c => new CategoryAllViewModel 
+                {
+                    Name = c.Name
+                }).ToListAsync();
+
+            return allCategories;
         }
 
         public async Task AddAsync(CategoryAddViewModel viewModel)

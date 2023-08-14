@@ -12,5 +12,7 @@ namespace Foodery.Services.Data.Interfaces
         Task<ICollection<ProductAllViewModel>> GetAllAsync();
 
         Task AddAsync(ProductAddViewModel viewModel);
+
+        Task<ProductAddViewModel> GetNewProductAsync();
     }
 }

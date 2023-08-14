@@ -1,7 +1,9 @@
 ﻿namespace Foodery.Services.Data
 {
     using Foodery.Data;
+    using Foodery.Data.Models;
     using Foodery.Services.Data.Interfaces;
+    using Foodery.Web.ViewModels.Category;
     using Foodery.Web.ViewModels.Product;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -16,9 +18,35 @@
             this.dbContext = dbContext;
         }
 
-        public Task AddAsync(ProductAddViewModel viewModel)
+        public async Task<ProductAddViewModel> GetNewProductAsync() 
         {
-            throw new NotImplementedException();
+            ICollection<CategoryAllViewModel> allCategories = await this.dbContext.Categories
+                .Select(c => new CategoryAllViewModel
+                {
+                    Name = c.Name
+                }).ToListAsync();
+
+            ProductAddViewModel currentProduct = new ProductAddViewModel
+            {
+                Categories = allCategories
+            };
+
+            return currentProduct;
+        }
+
+        public async Task AddAsync(ProductAddViewModel viewModel)
+        {
+            Product productToAdd = new Product 
+            {
+                Name = viewModel.Name,
+                Price = viewModel.Price,
+                ImageUrl = viewModel.ImageUrl,
+                Description = viewModel.Description,
+                CategoryId = viewModel.CategoryId
+            };
+
+            this.dbContext.Products.Add(productToAdd);
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<ICollection<ProductAllViewModel>> GetAllAsync()

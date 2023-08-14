@@ -5,5 +5,6 @@ namespace Foodery.Services.Data.Interfaces
     public interface ICategoryService
     {
         Task AddAsync(CategoryAddViewModel viewModel);
+        Task<IEnumerable<CategoryAllViewModel>> GetAllAsync();
     }
 }
