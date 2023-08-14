@@ -20,6 +20,7 @@ namespace Foodery.Services.Data
             IEnumerable<CategoryAllViewModel> allCategories = await this.dbContext.Categories
                 .Select(c => new CategoryAllViewModel 
                 {
+                    Id = c.Id,
                     Name = c.Name
                 }).ToListAsync();
 

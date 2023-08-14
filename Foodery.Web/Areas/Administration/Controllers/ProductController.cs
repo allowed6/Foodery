@@ -1,4 +1,5 @@
 ﻿using Foodery.Services.Data.Interfaces;
+using Foodery.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Foodery.Web.Areas.Administration.Controllers
@@ -23,10 +24,12 @@ namespace Foodery.Web.Areas.Administration.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductAddViewModel viewModel)
+        {
+            await this.productService.AddAsync(viewModel);
+
+            return RedirectToAction("All", "Product");
+        }
     }
 }

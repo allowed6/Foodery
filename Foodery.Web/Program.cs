@@ -11,6 +11,8 @@ namespace Foodery.Web
 
     using static Common.GlobalApplicationConstants;
     using System.Security.Cryptography.X509Certificates;
+    using Foodery.Web.Infrastructure.ModelBinders;
+    using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
     public class Program
     {
@@ -45,7 +47,12 @@ namespace Foodery.Web
 
             builder.Services.AddApplicationServices(typeof(IProductService));
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+                });
 
             WebApplication app = builder.Build();
 

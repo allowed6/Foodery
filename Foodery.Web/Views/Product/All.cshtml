@@ -4,10 +4,14 @@
     ViewData["Title"] = "All";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div class="text-center row">
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-dark w-25 p-3 fw-bold text-primary" style="text-decoration:none">Create New</a>
+    </p>
+}
+
+<div class="text-center row mb-5">
     @foreach (var e in Model)
     {
         <div class="card col-4 me-1" style="width: 20rem; ">
@@ -17,12 +21,13 @@
                 <p class="mb-0"><span class="fw-bold">Price </span>@e.Price</p>
             </div>
 
-            
+
             @if (User.IsInRole("Admin"))
             {
-                <a asp-controller="Product" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
-                <a asp-controller="Product" asp-action="Details" asp-route-id="@e.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@e.Id" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Edit</a>
             }
+
+            <a asp-controller="Product" asp-action="Details" asp-route-id="@e.Id" class="btn btn-primary mb-2 w-100 p-3 fw-bold">Details</a>
         </div>
     }
 </div>

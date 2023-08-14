@@ -23,6 +23,7 @@
             ICollection<CategoryAllViewModel> allCategories = await this.dbContext.Categories
                 .Select(c => new CategoryAllViewModel
                 {
+                    Id = c.Id,
                     Name = c.Name
                 }).ToListAsync();
 
@@ -38,6 +39,7 @@
         {
             Product productToAdd = new Product 
             {
+                Id = Guid.NewGuid().ToString(),
                 Name = viewModel.Name,
                 Price = viewModel.Price,
                 ImageUrl = viewModel.ImageUrl,
