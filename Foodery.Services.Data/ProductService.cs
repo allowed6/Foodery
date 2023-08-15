@@ -18,6 +18,23 @@
             this.dbContext = dbContext;
         }
 
+        public async Task<ProductEditViewModel?> GetProductForEditById(string id)
+        {
+            ProductEditViewModel? product = await dbContext.Products
+                .Where(p => p.Id.ToString() == id)
+                .Select(p => new ProductEditViewModel
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                })
+                .FirstOrDefaultAsync();
+
+            return product;
+        }
+
         public async Task<ProductAddViewModel> GetNewProductAsync() 
         {
             ICollection<CategoryAllViewModel> allCategories = await this.dbContext.Categories
@@ -39,7 +56,7 @@
         {
             Product productToAdd = new Product 
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 Name = viewModel.Name,
                 Price = viewModel.Price,
                 ImageUrl = viewModel.ImageUrl,

@@ -2,7 +2,7 @@
 
 namespace Foodery.Web.ViewModels.Product
 {
-    public class ProductAddViewModel
+    public class ProductEditViewModel
     {
         public Guid Id { get; set; }
 

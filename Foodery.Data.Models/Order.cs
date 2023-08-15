@@ -15,7 +15,7 @@
 
         public DateTime IssuedOn { get; set; }
 
-        public string ProductId { get; set; } = null!;
+        public Guid ProductId { get; set; }
 
 
         [ForeignKey(nameof(ProductId))]

@@ -31,5 +31,13 @@ namespace Foodery.Web.Areas.Administration.Controllers
 
             return RedirectToAction("All", "Product");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            var product = await this.productService.GetProductForEditById(id);
+
+            return View(product);
+        }
     }
 }

@@ -9,11 +9,11 @@
     {
         public Product()
         {
-            this.Id = Guid.NewGuid().ToString();
+            this.Id = Guid.NewGuid();
         }
 
         [Key]
-        public string Id { get; set; } = null!;
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(ProductNameMaxLength)]
