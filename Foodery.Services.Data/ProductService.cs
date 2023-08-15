@@ -18,8 +18,58 @@
             this.dbContext = dbContext;
         }
 
+        public async Task EditProductAsync(string id, ProductEditViewModel viewModel)
+        {
+            Product? product = await this.dbContext.Products
+                .FirstOrDefaultAsync(p => p.Id.ToString() == id);
+
+            if (product != null)
+            {
+                product.Name = viewModel.Name;
+                product.Price = viewModel.Price;
+                product.Description = viewModel.Description;
+                product.ImageUrl = viewModel.ImageUrl;
+                product.CategoryId = viewModel.CategoryId;
+            }
+
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ProductDetailsViewModel?> GetProductForDetailsById(string id)
+        {
+            ICollection<CategoryAllViewModel> allCategories = await this.dbContext.Categories
+                .Select(c => new CategoryAllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+
+            ProductDetailsViewModel? product = await dbContext.Products
+                .Where(p => p.Id.ToString() == id)
+                .Select(p => new ProductDetailsViewModel
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                    Categories = allCategories
+                })
+                .FirstOrDefaultAsync();
+
+            return product;
+        }
+
         public async Task<ProductEditViewModel?> GetProductForEditById(string id)
         {
+            ICollection<CategoryAllViewModel> allCategories = await this.dbContext.Categories
+                .Select(c => new CategoryAllViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+
             ProductEditViewModel? product = await dbContext.Products
                 .Where(p => p.Id.ToString() == id)
                 .Select(p => new ProductEditViewModel
@@ -29,6 +79,7 @@
                     ImageUrl = p.ImageUrl,
                     Description = p.Description,
                     CategoryId = p.CategoryId,
+                    Categories = allCategories
                 })
                 .FirstOrDefaultAsync();
 

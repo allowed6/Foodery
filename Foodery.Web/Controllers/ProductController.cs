@@ -20,5 +20,13 @@
 
             return this.View(products);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var product = await this.productService.GetProductForDetailsById(id);
+
+            return this.View(product);
+        }
     }
 }

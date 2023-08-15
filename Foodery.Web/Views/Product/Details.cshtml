@@ -1,0 +1,20 @@
+﻿@model Foodery.Web.ViewModels.Product.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="text-primary">Details</h2>
+
+<div class="row">
+    <div class="card w-50 mb-5">
+        <div class="card-body">
+            <h3 class="card-title text-center">@Model.Name</h3>
+            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.CategoryName</p>
+            <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
+            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <img class="mb-0 w-75 h-75" src="@Model.ImageUrl>"><span class="fw-bold"></span>
+        </div>
+            <a asp-controller="Product" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Products</a>
+    </div>
+</div>

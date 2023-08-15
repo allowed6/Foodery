@@ -39,5 +39,18 @@ namespace Foodery.Web.Areas.Administration.Controllers
 
             return View(product);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, ProductEditViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new InvalidOperationException("Invalid parameters!");
+            }
+
+            await this.productService.EditProductAsync(id, viewModel);
+
+            return RedirectToAction("All", "Product");
+        }
     }
 }

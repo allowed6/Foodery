@@ -16,5 +16,9 @@ namespace Foodery.Services.Data.Interfaces
         Task<ProductAddViewModel> GetNewProductAsync();
 
         Task<ProductEditViewModel?> GetProductForEditById(string id);
+
+        Task EditProductAsync(string id, ProductEditViewModel viewModel);
+
+        Task<ProductDetailsViewModel?> GetProductForDetailsById(string id);
     }
 }
