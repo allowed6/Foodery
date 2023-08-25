@@ -37,6 +37,7 @@
                             </li>
                         }
                     </ul>
+                    <partial name="_SearchbarPartial" />
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -61,6 +62,23 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $('#products-search-bar').on("change paste keyup", function ()
+        {
+            $('.card').show();
+
+            let searchValue = $('#products-search-bar').val();
+
+            for (let elem of $('.card')) {
+                let productName = $($(elem).children().children()[2]).text();
+
+                if (!productName.toLowerCase().includes(searchValue.toLowerCase())) {
+                    $(elem).hide();
+                }
+            }
+        })
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

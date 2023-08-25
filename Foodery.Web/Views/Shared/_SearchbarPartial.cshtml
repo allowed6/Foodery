@@ -1,0 +1,16 @@
+﻿@using Foodery.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        
+        <li class="nav-item">
+            <form class="d-flex">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" id="products-search-bar">
+            </form>
+        </li>
+    }
+</ul>
