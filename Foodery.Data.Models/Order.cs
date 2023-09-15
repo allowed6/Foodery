@@ -26,7 +26,7 @@
         public string IssuerId { get; set; } = null!;
 
         public virtual ApplicationUser Issuer { get; set; } = null!;
-
+        
         public int StatusId { get; set; }
 
 

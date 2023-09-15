@@ -1,18 +1,20 @@
 ﻿using Foodery.Services.Data.Interfaces;
+using Foodery.Web.ViewModels.Order;
 using Foodery.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Foodery.Web.Areas.Administration.Controllers
 {
     public class ProductController : AdminController
     {
         private readonly IProductService productService;
-        private readonly ICategoryService categoryService;
+        private readonly IOrderService orderService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        public ProductController(IProductService productService, IOrderService orderService)
         {
             this.productService = productService;
-            this.categoryService = categoryService;
+            this.orderService = orderService;
         }
 
         [HttpGet]

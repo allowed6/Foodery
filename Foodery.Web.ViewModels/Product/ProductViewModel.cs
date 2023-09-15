@@ -2,7 +2,7 @@
 
 namespace Foodery.Web.ViewModels.Product
 {
-    public class ProductDetailsViewModel
+    public class ProductViewModel
     {
         public Guid Id { get; set; }
 
@@ -13,8 +13,6 @@ namespace Foodery.Web.ViewModels.Product
         public string Description { get; set; } = null!;
 
         public string ImageUrl { get; set; } = null!;
-
-        public string CategoryName { get; set; } = null!;
 
         public int CategoryId { get; set; }
 

@@ -13,6 +13,14 @@
  */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 
+.image-hover {
+    transition: transform 0.2s ease-in; /* Adjust the duration and easing as needed */
+}
+
+    .image-hover:hover {
+        transform: scale(1.1); /* Increase the scale factor for a larger hover effect */
+    }
+
 :root,
 [data-bs-theme=light] {
     --bs-blue: #007bff;

@@ -46,6 +46,8 @@ namespace Foodery.Web
                 .AddEntityFrameworkStores<FooderyDbContext>();
 
             builder.Services.AddApplicationServices(typeof(IProductService));
+            builder.Services.AddApplicationServices(typeof(ICategoryService));
+            builder.Services.AddApplicationServices(typeof(IOrderService));
 
             builder.Services
                 .AddControllersWithViews()

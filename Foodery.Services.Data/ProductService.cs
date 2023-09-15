@@ -48,6 +48,7 @@
                 .Where(p => p.Id.ToString() == id)
                 .Select(p => new ProductDetailsViewModel
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
                     ImageUrl = p.ImageUrl,
