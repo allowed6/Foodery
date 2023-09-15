@@ -4,17 +4,17 @@
     {
         public Receipt()
         {
-            this.ReceiptOrders = new List<Order>();
+            this.ReceiptOrders = new List<Receipt>();
         }
 
         public Guid Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
-        public string RecipientId { get; set; } = null!;
+        public Guid RecipientId { get; set; }
 
         public virtual ApplicationUser Recipient { get; set; } = null!;
 
-        public virtual ICollection<Order> ReceiptOrders { get; set; }
+        public virtual ICollection<Receipt> ReceiptOrders { get; set; }
     }
 }

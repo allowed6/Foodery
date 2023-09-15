@@ -23,7 +23,7 @@
 
         public int Quantity { get; set; }
 
-        public string IssuerId { get; set; } = null!;
+        public Guid IssuerId { get; set; }
 
         public virtual ApplicationUser Issuer { get; set; } = null!;
         

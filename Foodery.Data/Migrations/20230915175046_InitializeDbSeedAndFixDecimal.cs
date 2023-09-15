@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Foodery.Data.Migrations
 {
-    public partial class InitializeDb : Migration
+    public partial class InitializeDbSeedAndFixDecimal : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -186,26 +186,32 @@ namespace Foodery.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RecipientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecipientId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    RecipientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Receipts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Receipts_AspNetUsers_RecipientId1",
-                        column: x => x.RecipientId1,
+                        name: "FK_Receipts_AspNetUsers_RecipientId",
+                        column: x => x.RecipientId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Receipts_Receipts_ReceiptId",
+                        column: x => x.ReceiptId,
+                        principalTable: "Receipts",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
@@ -227,22 +233,20 @@ namespace Foodery.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IssuedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ProductId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    IssuerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IssuerId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    ReceiptId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    IssuerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_IssuerId1",
-                        column: x => x.IssuerId1,
+                        name: "FK_Orders_AspNetUsers_IssuerId",
+                        column: x => x.IssuerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_OrderStatuses_StatusId",
                         column: x => x.StatusId,
@@ -255,12 +259,41 @@ namespace Foodery.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Receipts_ReceiptId",
-                        column: x => x.ReceiptId,
-                        principalTable: "Receipts",
-                        principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Vegetables" },
+                    { 2, "Meat" },
+                    { 3, "Dairy" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Active" },
+                    { 2, "Completed" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "Description", "ImageUrl", "Name", "Price" },
+                values: new object[] { new Guid("3c849f2f-2f48-4db9-9c89-1687ad38f7c2"), 2, "Tender beef raw stake.", "https://img.freepik.com/free-photo/raw-steak-white-paper_144627-10267.jpg?w=900&t=st=1691508215~exp=1691508815~hmac=b94fedbcc0b3a2318864761384985b3f7b7ea07415f9934276fe8a4f755a5c69", "Beef stake", 16.29m });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "Description", "ImageUrl", "Name", "Price" },
+                values: new object[] { new Guid("c4d22e6f-72bb-4e13-aa0f-b5aab20b8063"), 3, "Delicious french blue cheese.", "https://img.freepik.com/free-photo/delicious-piece-blue-cheese_144627-43343.jpg?w=740&t=st=1691508345~exp=1691508945~hmac=e0362a0145d63688f350affe6295f39dd2aa68fb2c1f7d09e2aa92dec4ab8f3f", "Blue cheese", 34.99m });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "Description", "ImageUrl", "Name", "Price" },
+                values: new object[] { new Guid("f32a3630-f988-41d8-b000-7980201b1033"), 1, "Freshly picked cucumbers from a home garden.", "https://img.freepik.com/free-photo/green-cucumber_144627-21625.jpg?w=1060&t=st=1691777180~exp=1691777780~hmac=69e89a3b2e1153169d0963bf34f111254a986af1488ef705d28019f8d50b585c", "Cucumber", 2.39m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -302,19 +335,14 @@ namespace Foodery.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_IssuerId1",
+                name: "IX_Orders_IssuerId",
                 table: "Orders",
-                column: "IssuerId1");
+                column: "IssuerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_ProductId",
                 table: "Orders",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_ReceiptId",
-                table: "Orders",
-                column: "ReceiptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_StatusId",
@@ -327,9 +355,14 @@ namespace Foodery.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Receipts_RecipientId1",
+                name: "IX_Receipts_ReceiptId",
                 table: "Receipts",
-                column: "RecipientId1");
+                column: "ReceiptId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receipts_RecipientId",
+                table: "Receipts",
+                column: "RecipientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -353,6 +386,9 @@ namespace Foodery.Data.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "Receipts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -362,13 +398,10 @@ namespace Foodery.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Receipts");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

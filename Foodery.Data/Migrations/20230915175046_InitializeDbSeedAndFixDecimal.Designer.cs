@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodery.Data.Migrations
 {
     [DbContext(typeof(FooderyDbContext))]
-    [Migration("20230808154105_ChangeToDecimalAndSeedDb")]
-    partial class ChangeToDecimalAndSeedDb
+    [Migration("20230915175046_InitializeDbSeedAndFixDecimal")]
+    partial class InitializeDbSeedAndFixDecimal
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.20")
+                .HasAnnotation("ProductVersion", "6.0.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -134,33 +134,23 @@ namespace Foodery.Data.Migrations
                     b.Property<DateTime>("IssuedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("IssuerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("IssuerId1")
+                    b.Property<Guid>("IssuerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("ReceiptId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IssuerId1");
+                    b.HasIndex("IssuerId");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ReceiptId");
 
                     b.HasIndex("StatusId");
 
@@ -182,12 +172,25 @@ namespace Foodery.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OrderStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Active"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Completed"
+                        });
                 });
 
             modelBuilder.Entity("Foodery.Data.Models.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -202,6 +205,11 @@ namespace Foodery.Data.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<decimal>("Price")
                         .HasPrecision(14, 2)
                         .HasColumnType("decimal(14,2)");
@@ -215,26 +223,29 @@ namespace Foodery.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a200cecb-303e-41a3-a0f0-dbac474a20c9",
+                            Id = new Guid("f32a3630-f988-41d8-b000-7980201b1033"),
                             CategoryId = 1,
                             Description = "Freshly picked cucumbers from a home garden.",
-                            ImageUrl = "https://www.freepik.com/free-photo/green-cucumber_7399053.htm#query=cucumbers&position=0&from_view=search&track=sph",
+                            ImageUrl = "https://img.freepik.com/free-photo/green-cucumber_144627-21625.jpg?w=1060&t=st=1691777180~exp=1691777780~hmac=69e89a3b2e1153169d0963bf34f111254a986af1488ef705d28019f8d50b585c",
+                            Name = "Cucumber",
                             Price = 2.39m
                         },
                         new
                         {
-                            Id = "8bf7912d-125f-4f24-b0e4-e769f516bb45",
+                            Id = new Guid("3c849f2f-2f48-4db9-9c89-1687ad38f7c2"),
                             CategoryId = 2,
                             Description = "Tender beef raw stake.",
                             ImageUrl = "https://img.freepik.com/free-photo/raw-steak-white-paper_144627-10267.jpg?w=900&t=st=1691508215~exp=1691508815~hmac=b94fedbcc0b3a2318864761384985b3f7b7ea07415f9934276fe8a4f755a5c69",
+                            Name = "Beef stake",
                             Price = 16.29m
                         },
                         new
                         {
-                            Id = "ca06e058-cbe2-47c9-afd8-aa1ca2e5a819",
+                            Id = new Guid("c4d22e6f-72bb-4e13-aa0f-b5aab20b8063"),
                             CategoryId = 3,
                             Description = "Delicious french blue cheese.",
                             ImageUrl = "https://img.freepik.com/free-photo/delicious-piece-blue-cheese_144627-43343.jpg?w=740&t=st=1691508345~exp=1691508945~hmac=e0362a0145d63688f350affe6295f39dd2aa68fb2c1f7d09e2aa92dec4ab8f3f",
+                            Name = "Blue cheese",
                             Price = 34.99m
                         });
                 });
@@ -248,16 +259,17 @@ namespace Foodery.Data.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RecipientId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("ReceiptId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RecipientId1")
+                    b.Property<Guid>("RecipientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipientId1");
+                    b.HasIndex("ReceiptId");
+
+                    b.HasIndex("RecipientId");
 
                     b.ToTable("Receipts");
                 });
@@ -401,8 +413,8 @@ namespace Foodery.Data.Migrations
                 {
                     b.HasOne("Foodery.Data.Models.ApplicationUser", "Issuer")
                         .WithMany("Orders")
-                        .HasForeignKey("IssuerId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IssuerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Foodery.Data.Models.Product", "Product")
@@ -410,10 +422,6 @@ namespace Foodery.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Foodery.Data.Models.Receipt", null)
-                        .WithMany("ReceiptOrders")
-                        .HasForeignKey("ReceiptId");
 
                     b.HasOne("Foodery.Data.Models.OrderStatus", "Status")
                         .WithMany()
@@ -441,10 +449,14 @@ namespace Foodery.Data.Migrations
 
             modelBuilder.Entity("Foodery.Data.Models.Receipt", b =>
                 {
+                    b.HasOne("Foodery.Data.Models.Receipt", null)
+                        .WithMany("ReceiptOrders")
+                        .HasForeignKey("ReceiptId");
+
                     b.HasOne("Foodery.Data.Models.ApplicationUser", "Recipient")
                         .WithMany()
-                        .HasForeignKey("RecipientId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Recipient");

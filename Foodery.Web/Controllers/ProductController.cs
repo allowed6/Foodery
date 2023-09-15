@@ -43,7 +43,7 @@
                 ProductId = productOrderViewModel.ProductId
             };
 
-            orderViewModel.IssuerId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            orderViewModel.IssuerId = Guid.Parse(this.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
              await this.orderService.CreateAsync(orderViewModel);
 

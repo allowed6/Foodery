@@ -19,7 +19,7 @@ namespace Foodery.Web.ViewModels.Order
 
         public int Quantity { get; set; }
 
-        public string IssuerId { get; set; } = null!;
+        public Guid IssuerId { get; set; }
 
         public virtual ApplicationUserViewModel Issuer { get; set; } = null!;
 
