@@ -228,6 +228,21 @@ hr {
     opacity: 0.25;
 }
 
+.cart-image {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.cashout-button {
+    text-align: left;
+    max-width: 20%;
+}
+
+
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     margin-top: 0;
     margin-bottom: 0.5rem;
@@ -2139,7 +2154,7 @@ progress {
     width: 100%;
     margin-bottom: 1rem;
     vertical-align: top;
-    border-color: var(--bs-table-border-color);
+    border-color: #78c2ad;
 }
 
     .table > :not(caption) > * > * {

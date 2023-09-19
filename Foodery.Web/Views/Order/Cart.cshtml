@@ -10,29 +10,45 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayName("Image")
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Product.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="cart-image" src="@item.Product.ImageUrl>"><span class="fw-bold"></span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-primary mb-2 w-100 p-3 fw-bold cashout-button">Cashout</button>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-primary text-right">Total Price: @Model.Sum(o => o.Quantity * o.Product.Price)</h4>
+    </div>
+</div>
