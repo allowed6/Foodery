@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -32,6 +32,7 @@
     <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
     <ProjectReference Include="..\Foodery.Data\Foodery.Data.csproj" />
     <ProjectReference Include="..\Foodery.Services.Data\Foodery.Services.Data.csproj" />
+    <ProjectReference Include="..\Foodery.Services.Mapping\Foodery.Services.Mapping.csproj" />
     <ProjectReference Include="..\Foodery.Web.Infrastructure\Foodery.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodery.Web.ViewModels\Foodery.Web.ViewModels.csproj" />
   </ItemGroup>

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
     <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
+    <ProjectReference Include="..\Foodery.Services.Mapping\Foodery.Services.Mapping.csproj" />
   </ItemGroup>
 
   <ItemGroup>

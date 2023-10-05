@@ -13,6 +13,9 @@ namespace Foodery.Web
     using System.Security.Cryptography.X509Certificates;
     using Foodery.Web.Infrastructure.ModelBinders;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+    using Foodery.Web.ViewModels.Home;
+    using Foodery.Services.Mapping;
+    using System.Reflection;
 
     public class Program
     {
@@ -59,6 +62,7 @@ namespace Foodery.Web
             WebApplication app = builder.Build();
 
             app.SeedAdministrator();
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
