@@ -11,7 +11,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string RecipientId { get; set; } = null!;
+        public Guid RecipientId { get; set; }
 
         public ApplicationUser Recipient { get; set; } = null!;
 

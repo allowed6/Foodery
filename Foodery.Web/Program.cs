@@ -51,6 +51,7 @@ namespace Foodery.Web
             builder.Services.AddApplicationServices(typeof(IProductService));
             builder.Services.AddApplicationServices(typeof(ICategoryService));
             builder.Services.AddApplicationServices(typeof(IOrderService));
+            builder.Services.AddApplicationServices(typeof(IReceiptService));
 
             builder.Services
                 .AddControllersWithViews()

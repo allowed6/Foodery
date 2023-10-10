@@ -16,6 +16,18 @@ namespace Foodery.Services.Data
             this.dbContext = dbContext;
         }
 
+        public async Task CompleteOrder(Guid orderId)
+        {
+            Order order = await dbContext.Orders
+                .SingleOrDefaultAsync(order => order.Id == orderId);
+
+            order.Status = await this.dbContext.OrderStatuses
+                .SingleOrDefaultAsync(os => os.Name == "Completed");
+
+            this.dbContext.Update(order);
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task CreateAsync(OrderCreateViewModel viewModel)
         {
             Order orderToCreate = new Order();
@@ -36,11 +48,11 @@ namespace Foodery.Services.Data
         public IQueryable<OrderViewModel> GetAll()
         {
             var allOrders = this.dbContext.Orders
-                .Select(o => new OrderViewModel 
+                .Select(o => new OrderViewModel
                 {
                     IssuedOn = o.IssuedOn,
                     Quantity = o.Quantity,
-                    Product = new ProductViewModel 
+                    Product = new ProductViewModel
                     {
                         Id = o.ProductId,
                         Name = o.Product.Name,
@@ -59,6 +71,14 @@ namespace Foodery.Services.Data
                 });
 
             return allOrders;
+        }
+
+        public async Task SetOrdersToReceipt(Receipt receipt)
+        {
+            List<Order> ordersFromDb = await this.dbContext.Orders.Where(order => order.IssuerId == receipt.RecipientId &&
+                order.Status.Name == "Active").ToListAsync();
+
+            receipt.Orders = ordersFromDb;
         }
     }
 }

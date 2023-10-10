@@ -1,13 +1,16 @@
-﻿using Foodery.Web.ViewModels.Receipt;
+﻿using Foodery.Data.Models;
+using Foodery.Web.ViewModels.Receipt;
 
 namespace Foodery.Services.Data.Interfaces
 {
     public interface IReceiptService
     {
-        Task CreateReceiptAsync(string recipientId);
+        Task CreateReceiptAsync(Guid recipientId);
 
         IQueryable<ReceiptViewModel> GetAll();
 
-        IQueryable<ReceiptViewModel> GetAllByRecipientId(string recipientId);
+        IQueryable<ReceiptViewModel> GetAllByRecipientId(Guid recipientId);
+
+        
     }
 }

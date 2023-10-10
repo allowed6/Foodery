@@ -9,10 +9,18 @@ namespace Foodery.Web.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderService orderService;
+        private readonly IReceiptService receiptService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IReceiptService receiptService)
         {
             this.orderService = orderService;
+            this.receiptService = receiptService;
+        }
+        public string UserId()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            return userId;
         }
 
         [Authorize]
@@ -28,9 +36,13 @@ namespace Foodery.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CartConfirm()
+        public async Task<IActionResult> CartConfirm()
         {
-            return View();
+            Guid userId = new Guid(UserId());
+
+            await this.receiptService.CreateReceiptAsync(userId);
+
+            return this.Redirect("/");
         }
     }
 }

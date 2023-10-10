@@ -3,6 +3,7 @@
     using ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using System.Security.Claims;
 
     public class HomeController : Controller
     {

@@ -24,16 +24,22 @@ namespace Foodery.Services.Data
             this.orderService = orderService;
         }
 
-        public async Task CreateReceiptAsync(string recipientId)
+        public async Task CreateReceiptAsync(Guid recipientId)
         {
+
             Receipt receipt = new Receipt
             {
                 Id = Guid.NewGuid(),
                 CreatedOn = DateTime.UtcNow,
-                RecipientId = recipientId,
-                Orders = await this.dbContext.Orders.Where(order => order.IssuerId.ToString() == recipientId &&
-                order.Status.Name == "Active").ToListAsync()
+                RecipientId = recipientId
             };
+
+            await this.orderService.SetOrdersToReceipt(receipt);
+
+            foreach (var order in receipt.Orders)
+            {
+                await this.orderService.CompleteOrder(order.Id);
+            }
 
             await this.dbContext.Receipts.AddAsync(receipt);
             await this.dbContext.SaveChangesAsync();
@@ -44,9 +50,11 @@ namespace Foodery.Services.Data
             return this.dbContext.Receipts.To<ReceiptViewModel>();
         }
 
-        public IQueryable<ReceiptViewModel> GetAllByRecipientId(string recipientId)
+        public IQueryable<ReceiptViewModel> GetAllByRecipientId(Guid recipientId)
         {
-            throw new NotImplementedException();
+            return this.dbContext.Receipts.Where(r => r.RecipientId == recipientId).To<ReceiptViewModel>();
         }
+
+        
     }
 }
