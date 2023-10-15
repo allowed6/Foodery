@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.20" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Foodery.Common\Foodery.Common.csproj" />
+    <ProjectReference Include="..\Fooder.Services.Mapping\Fooder.Services.Mapping.csproj" />
     <ProjectReference Include="..\Foodery.Data.Models\Foodery.Data.Models.csproj" />
-    <ProjectReference Include="..\Foodery.Services.Models\Foodery.Services.Models.csproj" />
   </ItemGroup>
 
 </Project>

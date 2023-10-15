@@ -14,8 +14,11 @@ namespace Foodery.Web
     using Foodery.Web.Infrastructure.ModelBinders;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
     using Foodery.Web.ViewModels.Home;
-    using Foodery.Services.Mapping;
     using System.Reflection;
+    using Foodery.Services.Models;
+    using Foodery.Web.ViewModels.Receipt;
+    using AutoMapper;
+    using Foodery.Services.Mapping;
 
     public class Program
     {
@@ -52,6 +55,7 @@ namespace Foodery.Web
             builder.Services.AddApplicationServices(typeof(ICategoryService));
             builder.Services.AddApplicationServices(typeof(IOrderService));
             builder.Services.AddApplicationServices(typeof(IReceiptService));
+            builder.Services.AddAutoMapper(typeof(IMapper));
 
             builder.Services
                 .AddControllersWithViews()
@@ -63,7 +67,11 @@ namespace Foodery.Web
             WebApplication app = builder.Build();
 
             app.SeedAdministrator();
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(ReceiptDetailsViewModel).GetType().Assembly,
+                typeof(ReceiptServiceModel).GetType().Assembly);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

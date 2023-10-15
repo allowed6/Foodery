@@ -3,6 +3,8 @@
     using Foodery.Data;
     using Foodery.Data.Models;
     using Foodery.Services.Data.Interfaces;
+    using Foodery.Services.Mapping;
+    using Foodery.Services.Models;
     using Foodery.Web.ViewModels.Category;
     using Foodery.Web.ViewModels.Product;
     using Microsoft.EntityFrameworkCore;
@@ -120,16 +122,10 @@
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<ProductAllViewModel>> GetAllAsync()
+        public IQueryable<ProductAllViewModel> GetAllAsync()
         {
-            ICollection<ProductAllViewModel> allProducts = await this.dbContext.Products
-                .Select(p => new ProductAllViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    ImageUrl = p.ImageUrl,
-                    Price = p.Price,
-                }).ToListAsync();
+            IQueryable<ProductAllViewModel> allProducts = this.dbContext.Products
+                .To<ProductAllViewModel>();
 
             return allProducts;
         }

@@ -16,7 +16,7 @@ namespace Foodery.Web.Controllers
             this.orderService = orderService;
             this.receiptService = receiptService;
         }
-        public string UserId()
+        public string GetUserId()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -38,7 +38,7 @@ namespace Foodery.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CartConfirm()
         {
-            Guid userId = new Guid(UserId());
+            Guid userId = new Guid(GetUserId());
 
             await this.receiptService.CreateReceiptAsync(userId);
 

@@ -1,4 +1,5 @@
-﻿using Foodery.Web.ViewModels.Product;
+﻿using Foodery.Services.Models;
+using Foodery.Web.ViewModels.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Foodery.Services.Data.Interfaces
 {
     public interface IProductService
     {
-        Task<ICollection<ProductAllViewModel>> GetAllAsync();
+        IQueryable<ProductAllViewModel> GetAllAsync();
 
         Task AddAsync(ProductAddViewModel viewModel);
 

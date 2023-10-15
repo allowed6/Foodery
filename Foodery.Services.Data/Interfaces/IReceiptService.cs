@@ -1,4 +1,5 @@
 ﻿using Foodery.Data.Models;
+using Foodery.Services.Models;
 using Foodery.Web.ViewModels.Receipt;
 
 namespace Foodery.Services.Data.Interfaces
@@ -7,10 +8,10 @@ namespace Foodery.Services.Data.Interfaces
     {
         Task CreateReceiptAsync(Guid recipientId);
 
-        IQueryable<ReceiptViewModel> GetAll();
+        IQueryable<ReceiptDetailsViewModel> GetAll();
 
-        IQueryable<ReceiptViewModel> GetAllByRecipientId(Guid recipientId);
+        IQueryable<ReceiptDetailsViewModel> GetAllByRecipientId(Guid recipientId);
 
-        
+
     }
 }

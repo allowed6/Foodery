@@ -19,9 +19,9 @@
             this.orderService = orderService;
         }
 
-        public async Task<IActionResult> All()
+        public IActionResult All()
         {
-            var products = await this.productService.GetAllAsync();
+            var products = this.productService.GetAllAsync();
 
             return this.View(products);
         }

@@ -1,4 +1,6 @@
-﻿namespace Foodery.Web.ViewModels.Product
+﻿using Foodery.Services.Mapping;
+
+namespace Foodery.Web.ViewModels.Product
 {
     public class ProductOrderViewModel
     {

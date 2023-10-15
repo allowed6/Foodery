@@ -1,6 +1,8 @@
-﻿namespace Foodery.Web.ViewModels.Product
+﻿using Foodery.Services.Mapping;
+
+namespace Foodery.Web.ViewModels.Product
 {
-    public class ProductAllViewModel
+    public class ProductAllViewModel : IMapFrom<Foodery.Data.Models.Product>
     {
         public Guid Id { get; set; }
 

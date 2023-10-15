@@ -2,13 +2,8 @@
 using Foodery.Data.Models;
 using Foodery.Services.Data.Interfaces;
 using Foodery.Services.Mapping;
+using Foodery.Services.Models;
 using Foodery.Web.ViewModels.Receipt;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodery.Services.Data
 {
@@ -45,16 +40,17 @@ namespace Foodery.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<ReceiptViewModel> GetAll()
+        public IQueryable<ReceiptDetailsViewModel> GetAll()
         {
-            return this.dbContext.Receipts.To<ReceiptViewModel>();
+            return this.dbContext.Receipts
+                .To<ReceiptDetailsViewModel>();
         }
 
-        public IQueryable<ReceiptViewModel> GetAllByRecipientId(Guid recipientId)
+        public IQueryable<ReceiptDetailsViewModel> GetAllByRecipientId(Guid recipientId)
         {
-            return this.dbContext.Receipts.Where(r => r.RecipientId == recipientId).To<ReceiptViewModel>();
+            return this.dbContext.Receipts.Where(r => r.RecipientId == recipientId).To<ReceiptDetailsViewModel>();
         }
 
-        
+
     }
 }

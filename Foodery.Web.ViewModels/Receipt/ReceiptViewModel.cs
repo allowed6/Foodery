@@ -1,7 +1,6 @@
-﻿
-
-using Foodery.Web.ViewModels.Order;
+﻿using Foodery.Web.ViewModels.Order;
 using Foodery.Web.ViewModels.User;
+using Foodery.Services.Models;
 
 namespace Foodery.Web.ViewModels.Receipt
 {
@@ -9,14 +8,14 @@ namespace Foodery.Web.ViewModels.Receipt
     {
         public ReceiptViewModel()
         {
-            this.Orders = new List<OrderViewModel>();
+            Orders = new List<OrderViewModel>();
         }
 
         public Guid Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
-        public string RecipientId { get; set; } = null!;
+        public Guid RecipientId { get; set; }
 
         public ApplicationUserViewModel Recipient { get; set; } = null!;
 
