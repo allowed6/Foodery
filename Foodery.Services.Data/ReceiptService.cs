@@ -46,9 +46,9 @@ namespace Foodery.Services.Data
                 .To<ReceiptDetailsViewModel>();
         }
 
-        public IQueryable<ReceiptDetailsViewModel> GetAllByRecipientId(Guid recipientId)
+        public IQueryable<ReceiptProfileViewModel> GetAllByRecipientId(Guid recipientId)
         {
-            return this.dbContext.Receipts.Where(r => r.RecipientId == recipientId).To<ReceiptDetailsViewModel>();
+            return this.dbContext.Receipts.Where(r => r.RecipientId == recipientId).To<ReceiptProfileViewModel>();
         }
 
 

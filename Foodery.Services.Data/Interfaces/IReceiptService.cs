@@ -10,7 +10,7 @@ namespace Foodery.Services.Data.Interfaces
 
         IQueryable<ReceiptDetailsViewModel> GetAll();
 
-        IQueryable<ReceiptDetailsViewModel> GetAllByRecipientId(Guid recipientId);
+        IQueryable<ReceiptProfileViewModel> GetAllByRecipientId(Guid recipientId);
 
 
     }

@@ -9,6 +9,7 @@
     using Humanizer.DateTimeHumanizeStrategy;
     using System.Security.Claims;
     using Microsoft.AspNetCore.Authorization;
+    using Foodery.Services.Mapping;
 
     public class ReceiptController : Controller
     {
@@ -41,10 +42,11 @@
 
             Guid userIdAsGuid = new Guid(userId);
 
-            List<ReceiptDetailsViewModel> receipts = await
-                this.receiptService.GetAllByRecipientId(userIdAsGuid).ToListAsync();
+            List<ReceiptProfileViewModel> receipts = await
+                this.receiptService.GetAllByRecipientId(userIdAsGuid)
+                .ToListAsync();
 
-            return this.View();
+            return this.View(receipts);
         }
 
         [Authorize]
